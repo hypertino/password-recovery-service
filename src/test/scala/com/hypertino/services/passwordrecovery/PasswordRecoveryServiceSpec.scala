@@ -17,7 +17,7 @@ import com.hypertino.hyperbus.subscribe.Subscribable
 import com.hypertino.hyperbus.transport.api.ServiceRegistrator
 import com.hypertino.hyperbus.transport.registrators.DummyRegistrator
 import com.hypertino.service.config.ConfigLoader
-import com.hypertino.services.passwordrecovery.api.{InitRecovery, PasswordRecoveriesPost}
+import com.hypertino.services.passwordrecovery.api.{InitPasswordRecovery, PasswordRecoveriesPost}
 import com.hypertino.services.passwordrecovery.apiref.authpin.{NewPin, PinsPost}
 import com.hypertino.services.passwordrecovery.apiref.email.EmailsPost
 import com.hypertino.services.passwordrecovery.apiref.user.UsersGet
@@ -72,7 +72,7 @@ class PasswordRecoveryServiceSpec extends FlatSpec with Module with BeforeAndAft
 
   "PasswordRecoveryService" should "create pin code and send email" in {
     val r = hyperbus
-      .ask(PasswordRecoveriesPost(InitRecovery(email=Some("john@example.net"))))
+      .ask(PasswordRecoveriesPost(InitPasswordRecovery(email=Some("john@example.net"))))
       .runAsync
       .futureValue
 
@@ -91,7 +91,7 @@ class PasswordRecoveryServiceSpec extends FlatSpec with Module with BeforeAndAft
 
   it should "conflict if no such user is found" in {
     val r = hyperbus
-      .ask(PasswordRecoveriesPost(InitRecovery(email=Some("me@example.net"))))
+      .ask(PasswordRecoveriesPost(InitPasswordRecovery(email=Some("me@example.net"))))
       .runAsync
       .failed
       .futureValue

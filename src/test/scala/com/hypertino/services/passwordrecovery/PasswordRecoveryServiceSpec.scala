@@ -81,7 +81,7 @@ class PasswordRecoveryServiceSpec extends FlatSpec with Module with BeforeAndAft
     val email = emails.head
     emails.clear
 
-    email.body.template shouldBe "recovery-password"
+    email.body.template shouldBe "recovery-password-email"
     val pin = email.body.data.dynamic.pin.toString
     val s = new String(Base64.getDecoder.decode(pin.getBytes("UTF-8")), "UTF-8")
     s should startWith("pwd-100500:")

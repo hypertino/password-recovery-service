@@ -10,3 +10,6 @@
 [submodule "api/email-service-api"]
 	path = api/email-service-api
 	url = git@github.com:hypertino/email-service-api.git
+[submodule "api/user-service-api"]
+	path = api/user-service-api
+	url = git@github.com:hypertino/user-service-api.git

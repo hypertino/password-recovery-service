@@ -56,7 +56,8 @@ class PasswordRecoveryService(implicit val injector: Injector) extends Service w
       hyperbus
         .ask(UsersGet(query = Obj.from("email" → email)))
         .flatMap {
-          case Ok(DynamicBody(None,Lst(items)), _) ⇒ {
+          case Ok(body:DynamicBody,_) ⇒
+            val items = body.content.asInstanceOf[Lst].v
             if (items.isEmpty || items.tail.nonEmpty) {
               Task.raiseError(Conflict(ErrorBody("user-not-found", Some(s"User with '$email' is not found"))))
             }
@@ -78,7 +79,6 @@ class PasswordRecoveryService(implicit val injector: Injector) extends Service w
                     }
                 }
             }
-          }
         }
     } getOrElse {
       // email is optional, in future there could be different recovery options (phone?)

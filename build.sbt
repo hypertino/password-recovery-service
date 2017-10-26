@@ -34,6 +34,11 @@ lazy val `password-recovery-service` = project in file(".") enablePlugins Raml2H
         path = "api/email-service-api/email.raml",
         packageName = "com.hypertino.services.passwordrecovery.apiref.email",
         isResource = false
+      ),
+      ramlSource(
+        path = "api/user-service-api/user.raml",
+        packageName = "com.hypertino.services.passwordrecovery.apiref.user",
+        isResource = false
       )
     )
 )

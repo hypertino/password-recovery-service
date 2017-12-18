@@ -4,7 +4,7 @@ scalaVersion := crossScalaVersions.value.head
 
 lazy val `password-recovery-service` = project in file(".") enablePlugins Raml2Hyperbus settings (
     name := "password-recovery-service",
-    version := "0.1-SNAPSHOT",
+    version := "0.2-SNAPSHOT",
     organization := "com.hypertino",
     resolvers ++= Seq(
       Resolver.sonatypeRepo("public")

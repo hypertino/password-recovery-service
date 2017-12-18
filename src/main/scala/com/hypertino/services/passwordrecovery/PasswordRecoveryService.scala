@@ -73,7 +73,7 @@ class PasswordRecoveryService(implicit val injector: Injector) extends Service w
                   val pin64 = new String(Base64.getEncoder.encode((pinId + ":" + pin).getBytes("UTF-8")), "UTF-8")
                   val emailData = Obj.from("user" → user, "pin" → pin64)
                   hyperbus
-                    .ask(EmailsPost(EmailMessage("recovery-password-email",p.body.language,emailData)))
+                    .ask(EmailsPost(EmailMessage(p.body.template.getOrElse("recovery-password-email"),p.body.language,emailData)))
                     .map { _ ⇒
                       Accepted(EmptyBody)
                     }
